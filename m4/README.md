@@ -8,6 +8,7 @@
 | Atendimentos - Paginação | 1.6   |
 | Mudar Status             | 1.3   |
 | Dashboard                | 1.45  |
+| Dashboard - Filtros      | 2.0   |
 | Habilitar Botão Exportar | 0.15  |
 | Card Transferencia       | 1.4   |
 | Tabela Tipo Transporte   | 1.2   |
