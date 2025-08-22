@@ -62,8 +62,7 @@ public async void GerarTabela()
 
 # Card Atendimentos
 
-cs
-```
+```cs
 public void GerarGraficoLinhaTipo()
 {
     var db = new Entities1();
