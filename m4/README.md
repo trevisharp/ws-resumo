@@ -104,8 +104,7 @@ public void GerarGraficoLinhaTipo()
 
 # Gráfico Pizza
 
-cs
-```
+```cs
 public void GerarGraficoPizza()
 {
     var db = new Entities4();
@@ -172,8 +171,7 @@ public void GerarGraficoPizza()
 
 # Gerar Pop Up
 
-cs
-```
+```cs
 private void DefinirPopUp_Load(object sender, EventArgs e)
 {
     foreach (var column in typeof(dados_xlsx___TransferenciasPacientes).GetProperties())
@@ -207,8 +205,7 @@ private void DefinirPopUp_Load(object sender, EventArgs e)
 
 # Gerar Dashboard
 
-cs
-```
+```cs
 public void GerarDashBoard()
 {
     var db = new Entities4();
