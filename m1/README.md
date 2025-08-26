@@ -14,3 +14,7 @@
 | Filtros Status           | 1.2   |
 | Listagem                 | 0.9   |
 | Filtros Prioridade       | 1.2   |
+
+# Caso de Uso
+
+<img src="../imgs/caso-de-uso.png" />
