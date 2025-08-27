@@ -2,13 +2,20 @@
 |--------------------------|-------|
 | Entregas                 | 0.7   |
 | Rodar o banco            | 0.1   |
-| MER                      | 2.2   |
-| DER                      | 1.2   |
-| Descrição técnica        | 2.0   |
-| Testes                   | 8.0   |
+| Documento                | 1.5   |
+| Dicionário de Dados      | 0.5   |
+| MER                      | 1.1   |
+| DER                      | 0.7   |
+| Diagramas de Contexto    | 0.5   |
+| Diagrama de Componentes  | 0.55  |
 
 # Dicionario de Dados
 
 <img src="../imgs/dicionario-de-dados.jfif" />
 
 # Diagrama de Contexto
+
+<img src="../imgs/diagrama-de-contexto.jfif" />
+
+# Diagrama de Componentes
+
