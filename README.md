@@ -6,8 +6,8 @@
 - [x] Atividade
 - [x] Sequência
 - [x] DER
-- [ ] MER			
-- [ ] Dicionário de Dados	
+- [x] MER			
+- [x] Dicionário de Dados	
 - [ ] Contexto
-- [ ] Contâiners Lógicos
 - [ ] Componentes/Objetos
+- [ ] Contâiners Lógicos
