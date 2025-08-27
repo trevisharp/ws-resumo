@@ -18,3 +18,7 @@
 # Caso de Uso
 
 <img src="../imgs/caso-de-uso.png" />
+
+# Diagrama de Atividade
+
+<img src="../imgs/diagrama-de-atividade.png" />
