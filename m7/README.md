@@ -6,3 +6,9 @@
 | DER                      | 1.2   |
 | Descrição técnica        | 2.0   |
 | Testes                   | 8.0   |
+
+# Dicionario de Dados
+
+<img src="../imgs/dicionario-de-dados.jfif" />
+
+# Diagrama de Contexto
