@@ -22,3 +22,7 @@
 # Diagrama de Atividade
 
 <img src="../imgs/diagrama-de-atividade.png" />
+
+# Diagrama de Sequência
+
+<img src="../imgs/diagrama-de-sequencia.png" />
