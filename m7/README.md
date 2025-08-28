@@ -8,6 +8,7 @@
 | DER                      | 0.7   |
 | Diagramas de Contexto    | 0.5   |
 | Diagrama de Componentes  | 0.55  |
+| Testes                   | 6.0   |
 
 # Dicionario de Dados
 
