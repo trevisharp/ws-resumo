@@ -17,6 +17,3 @@
 # Diagrama de Contexto
 
 <img src="../imgs/diagrama-de-contexto.jfif" />
-
-# Diagrama de Componentes
-
