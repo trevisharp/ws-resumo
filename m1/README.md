@@ -37,6 +37,7 @@ private void OnButtonClick(object sender, EventArgs e)
   timer.Tick += (o, e) =>
   {
     textBoxSenha.PasswordChar = '*';
+    timer.Stop();
   }
 } 
 ```
@@ -67,6 +68,7 @@ private void OnButtonClick(object sender, EventArgs e)
     {
       btLogin.Enabled = true;
       textBoxSenha.Enabled = true;
+      timer.Stop();
     }
   }
 } 
