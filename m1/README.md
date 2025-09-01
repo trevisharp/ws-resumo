@@ -45,17 +45,29 @@ private void OnButtonClick(object sender, EventArgs e)
 # Bloquear Login
 
 ```cs
+int tentativas = 0;
 private void OnButtonClick(object sender, EventArgs e)
 {
-  btLogin.Enabled = false;
-  textBoxSenha.Enabled = false;
-  Timer timer = new Timer();
-  timer.Invertval = 15000;
-  timer.Start();
-  timer.Tick += (o, e) =>
+  // Login
+  if (deuerrado)
   {
-    btLogin.Enabled = true;
-    textBoxSenha.Enabled = true;
+    // Mostra mensagem
+    tentativas++;
+  }
+
+  if (tentaivas == 2)
+  {
+    tentativas = 0;
+    btLogin.Enabled = false;
+    textBoxSenha.Enabled = false;
+    Timer timer = new Timer();
+    timer.Invertval = 15000;
+    timer.Start();
+    timer.Tick += (o, e) =>
+    {
+      btLogin.Enabled = true;
+      textBoxSenha.Enabled = true;
+    }
   }
 } 
 ```
