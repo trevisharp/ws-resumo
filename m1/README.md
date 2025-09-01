@@ -30,15 +30,19 @@
 ```cs
 private void OnButtonClick(object sender, EventArgs e)
 {
-  Timer timer = new Timer();
-  textBoxSenha.PasswordChar = '\0';
-  timer.Invertval = 5000;
-  timer.Start();
-  timer.Tick += (o, e) =>
-  {
-    textBoxSenha.PasswordChar = '*';
+  // Remove temporariamente o PasswordChar
+  textBox1.PasswordChar = '\0';
+
+ // Usa explicitamente o Timer do Windows  Forms
+ System.Windows.Forms.Timer timer = new  System.Windows.Forms.Timer();
+ timer.Interval = 5000; // 5 segundos
+ timer.Tick += (s, args) =>
+ {
+    textBox1.PasswordChar = '*';
     timer.Stop();
-  }
+    timer.Dispose();
+ };
+ timer.Start();
 } 
 ```
 
