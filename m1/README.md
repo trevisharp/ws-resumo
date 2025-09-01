@@ -58,18 +58,8 @@ private void OnButtonClick(object sender, EventArgs e)
 
   if (tentaivas == 2)
   {
-    tentativas = 0;
-    btLogin.Enabled = false;
-    textBoxSenha.Enabled = false;
-    Timer timer = new Timer();
-    timer.Invertval = 15000;
-    timer.Start();
-    timer.Tick += (o, e) =>
-    {
-      btLogin.Enabled = true;
-      textBoxSenha.Enabled = true;
-      timer.Stop();
-    }
+    // Usuários bloqueados
+    // Colocar o nome do usuário na clásica estática
   }
 } 
 ```
