@@ -24,3 +24,19 @@
 # Diagrama de Sequência
 
 <img src="../imgs/diagrama-de-sequencia.png" />
+
+# Ver Senha
+
+```cs
+private void OnButtonClick(object sender, EventArgs e)
+{
+  Timer timer = new Timer();
+  textBoxSenha.PasswordChar = '\0';
+  timer.Invertval = 5000;
+  timer.Start();
+  timer.Tick += (o, e) =>
+  {
+    textBoxSenha.PasswordChar = '*';
+  }
+} 
+```
