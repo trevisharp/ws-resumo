@@ -4,8 +4,8 @@
 | Dados Carregados         | 0.4   |
 | Design e Navegabilidade  | 1.25  |
 | Tabela Transferencia     | 0.9   |
-| Gráfico de Pizza         | 1.0   |
-| Tabela Tipo Transporte   | 1.2   |
+| Gráfico de Pizza         | 1.2   |
+| Graficos                 | 1.2   |
 | Dashboard                | 1.45  |
 | Habilitar Botão Exportar | 0.15  |
 | Filtros Básicos          | 0.8   |
@@ -63,7 +63,7 @@ public void GerarGraficoPizza()
     // 1 de cada a 58 dias atras
 
     var count = comboBox1.SelectedIndex + 1;
-    var pago = 100 * comboBox1.SelectedIndex + 100;
+    var pago = 100 * count;
 
     label7.Text = count.ToString(); 
     label10.Text = pago.ToString();
