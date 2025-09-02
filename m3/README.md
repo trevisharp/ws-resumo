@@ -93,10 +93,11 @@ public class DB : DbContext
     {
         var con = new SqlConnectionStringBuilder
         {
-            DataSource = "localhost/SQLEXPRESS",
-            InitialCatalog = "Sessao3",
-            IntegratedSecurity = true,
-            TrustServerCertificate = true,            
+            DataSource = "192.168.9.254,1437",
+            InitialCatalog = "NomeDoBanco",
+            UserID = "sa",
+            Password = "Competidor5@Z627#t4",
+            IntegratedSecurity = false
         };
 
         optionsBuilder.UseSqlServer(con.ToString());
