@@ -3,17 +3,16 @@
 | Entregas                 | 0.3   |
 | Dados Carregados         | 0.4   |
 | Design e Navegabilidade  | 1.25  |
-| Card Transferencia       | 0.9   |
-| Antendimentos - Graficos | 1.2   |
+| Tabela Transferencia     | 0.9   |
+| Gráfico de Pizza         | 1.0   |
 | Tabela Tipo Transporte   | 1.2   |
 | Dashboard                | 1.45  |
 | Habilitar Botão Exportar | 0.15  |
 | Filtros Básicos          | 0.8   |
 | Atendimentos - Paginação | 1.6   |
 
-# Card de Transferências
+# Tabela Transferencia
 
-Com valores aleatórios:
 ```cs
 public async void GerarTabela()
 {   
@@ -21,8 +20,8 @@ public async void GerarTabela()
     dataGridView1.Columns.Clear();
 
     dataGridView1.Columns.Add($"Tipo transporte", $"Tipo transporte");
-    for (int i = 0; i < 12; i++) 
-        dataGridView1.Columns.Add($"{i+1}/{ano}", $"{i + 1}/{ano}");
+    for (int i = 1; i <= 12; i++) 
+        dataGridView1.Columns.Add($"{i}/{ano}", $"{i}/{ano}");
 
     var rand = new Random(ano);
     dataGridView1.Rows.Add("Ambulância", 
@@ -38,54 +37,56 @@ public async void GerarTabela()
 }
 ```
 
-Com query:
+# Gráfico Pizza
 
 ```cs
-public async void GerarTabela()
+// Inicializacao
+comboBox1.Items.Add("7 dias");
+comboBox1.Items.Add("15 dias");
+comboBox1.Items.Add("30 dias");
+comboBox1.Items.Add("60 dias");
+label7.Text = "8";
+label8.Text = "800";
+
+public void GerarGraficoPizza()
 {
-    var db = new Entities1();
-    var dados = db.dados_xlsx___TransferenciasPacientes
-        .ToArray()
-        .Where(u => u.DataTransferencia.Contains($"/{ano}"))
-        .GroupBy(u => new {
-            Mes = int.Parse(u.DataTransferencia.Split('/')[1]),
-            u.TipoTransporte
-        })
-        .Select(g => new {
-            g.Key.TipoTransporte,
-            g.Key.Mes,
-            ValorTransferencias = g.Average(x => x.ValorTotalPago)
-        })
-       .ToArray();
-    
-    
-    dataGridView1.Rows.Clear();
-    dataGridView1.Columns.Clear();
+    // COMBOBOX
+    // 7 dias   0   1   100
+    // 15 dias  1   2   200
+    // 30 dias  2   3   300
+    // 60 dias  3   4   400
 
-    dataGridView1.Columns.Add($"Tipo transporte", $"Tipo transporte");
-    for (int i = 0; i < 12; i++) 
-        dataGridView1.Columns.Add($"{i+1}/{ano}", $"{i + 1}/{ano}");
+    // 4 de UTI Movel + 4 de Ambulância
+    // 1 de cada a 5 dias atras
+    // 1 de cada a 13 dias atras
+    // 1 de cada a 28 dias atras
+    // 1 de cada a 58 dias atras
 
-    foreach (var item in dados.GroupBy(j => j.TipoTransporte))
+    var count = comboBox1.SelectedIndex + 1;
+    var pago = 100 * comboBox1.SelectedIndex + 100;
+
+    label7.Text = count.ToString(); 
+    label10.Text = pago.ToString();
+
+    chart1.Series.Clear();
+    chart1.Titles.Clear();
+
+    chart1.Titles.Add("Distribuição por Transporte");
+    Series series = new Series
     {
-        dataGridView1.Rows.Add(item.Key, 
-            item.FirstOrDefault(i => i.Mes == 1)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 2)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 3)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 4)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 5)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 6)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 7)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 8)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 9)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 10)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 11)?.ValorTransferencias ?? 0,
-            item.FirstOrDefault(i => i.Mes == 12)?.ValorTransferencias ?? 0
-        );
-    }
+        Name = "Transporte",
+        IsVisibleInLegend = true,
+        ChartType = SeriesChartType.Pie
+    };
+
+    chart1.Series.Add(series);
+
+    series.Points.AddXY("Ambulancia", 4);
+    series.Points.AddXY("UTI Movel", 4);
+
+    chart1.Legends[0].Enabled = true;
 }
 ```
-
 
 # Card Atendimentos
 
@@ -125,73 +126,6 @@ public void GerarGraficoLinhaTipo()
     chart3.ChartAreas[0].AxisY.Title = "Quantidade";
     chart3.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
     chart3.ChartAreas[0].AxisX.Interval = 1;
-}
-```
-
-# Gráfico Pizza
-
-```cs
-public void GerarGraficoPizza()
-{
-    var db = new Entities4();
-
-    int dias =
-        comboBox4.SelectedIndex == -1 ? 
-        -1 : int.Parse(comboBox4.Text.Split(' ')[0]);
-    string tipo = comboBox5.Text;
-
-    var dados = db.dados_xlsx___TransferenciasPacientes
-           .AsEnumerable()
-           .Where(i =>
-           {
-               var partes = i.DataTransferencia.Split('/');
-               var dia = int.Parse(partes[1]);
-               var mes = int.Parse(partes[0]);
-               var ano = int.Parse(partes[2]);
-
-               if (dias == -1)
-                   return true;
-
-               if (mes > 9 && ano != 2025 && dia >= 4)
-                   return false;
-
-               return (mes >= 7 && dias == 60) ||
-                    (mes >= 8 && dias == 30) ||
-                    (mes >= 8 && dia >= 20 && dias == 15) ||
-                    ((mes == 8 && dia >= 28) || mes == 9 && dias == 7);
-           })
-           .GroupBy(u => u.TipoTransporte)
-           .Select(c => new { Tipo = c.Key, Valores = c.Sum(u => u.ValorTotalPago)  , Quantidade = c.Count()})
-           .ToArray();
-
-    int totalqtd = dados
-           .Where(u => u.Tipo == tipo || tipo == "")
-           .Sum(x => x.Quantidade);
-    int valortoal = dados
-           .Where(u => u.Tipo == tipo || tipo == "")
-           .Sum(x => (int)x.Valores);
-
-    label7.Text = valortoal.ToString();
-    label10.Text = totalqtd.ToString();
-
-    chart1.Series.Clear();
-    chart1.Titles.Clear();
-
-    chart1.Titles.Add("Distribuição por Transporte");
-
-    Series series = new Series
-    {
-        Name = "Transporte",
-        IsVisibleInLegend = true,
-        ChartType = SeriesChartType.Pie
-    };
-
-    chart1.Series.Add(series);
-
-    foreach (var item in dados)
-        series.Points.AddXY(item.Tipo, item.Quantidade);
-
-    chart1.Legends[0].Enabled = true;
 }
 ```
 
