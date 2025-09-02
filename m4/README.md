@@ -2,10 +2,8 @@
 |--------------------------|-------|
 | Entregas                 | 0.3   |
 | Dados Carregados         | 0.4   |
-| Design                   | 0.5   |
-| Navegabilidade           | 0.5   |
-| Login                    | 0.5   |
-| Card Transferencia       | 1.4   |
+| Design e Navegabilidade  | 1.25  |
+| Card Transferencia       | 0.9   |
 | Antendimentos - Graficos | 1.2   |
 | Tabela Tipo Transporte   | 1.2   |
 | Dashboard                | 1.45  |
@@ -15,6 +13,33 @@
 
 # Card de Transferências
 
+Com valores aleatórios:
+```cs
+public async void GerarTabela()
+{   
+    dataGridView1.Rows.Clear();
+    dataGridView1.Columns.Clear();
+
+    dataGridView1.Columns.Add($"Tipo transporte", $"Tipo transporte");
+    for (int i = 0; i < 12; i++) 
+        dataGridView1.Columns.Add($"{i+1}/{ano}", $"{i + 1}/{ano}");
+
+    var rand = new Random(ano);
+    dataGridView1.Rows.Add("Ambulância", 
+        rand.Next(), rand.Next(), rand.Next(),
+        rand.Next(), rand.Next(), rand.Next(),
+        rand.Next(), rand.Next(), rand.Next()
+    );
+    dataGridView1.Rows.Add("UTI Movel", 
+        rand.Next(), rand.Next(), rand.Next(),
+        rand.Next(), rand.Next(), rand.Next(),
+        rand.Next(), rand.Next(), rand.Next()
+    );
+}
+```
+
+Com query:
+
 ```cs
 public async void GerarTabela()
 {
@@ -23,7 +48,7 @@ public async void GerarTabela()
         .ToArray()
         .Where(u => u.DataTransferencia.Contains($"/{ano}"))
         .GroupBy(u => new {
-            Mes = int.Parse(u.DataTransferencia.Split('/')[0]),
+            Mes = int.Parse(u.DataTransferencia.Split('/')[1]),
             u.TipoTransporte
         })
         .Select(g => new {
@@ -60,6 +85,7 @@ public async void GerarTabela()
     }
 }
 ```
+
 
 # Card Atendimentos
 
