@@ -177,23 +177,21 @@ private void CheckedChanged(object sender, EventArgs e)
 public void GerarDashBoard()
 {
     var db = new Entities4();
-
     var colunas = popup.Campos.ToArray();
     
     dataGridView1.Columns.Clear();
     dataGridView1.Rows.Clear();
 
     foreach (var item in colunas)
-    {
         dataGridView1.Columns.Add(item, item);
-    }
 
     var dados = db.dados_xlsx___TransferenciasPacientes
         .Join(db.dados_xlsx___Usuarios, a => a.PacienteId, s => s.id, (a, s) => new { a, s })
-        .ToArray()
-        .Where(u => sexo.Count == 0 || sexo.Contains(u.s.sexo))
-        .Where(u => textBox1.Text == "" || u.s.nome.Contains(textBox1.Text.Replace("%", "")))
-        .Take((int)numericUpDown1.Value)    
+        // Filtros
+        // .ToArray()
+        // .Where(u => sexo.Count == 0 || sexo.Contains(u.s.sexo))
+        // .Where(u => textBox1.Text == "" || u.s.nome.Contains(textBox1.Text.Replace("%", "")))
+        // .Take((int)numericUpDown1.Value)    
         .ToArray();
 
     if (popup.Campos.Count() == 0)
