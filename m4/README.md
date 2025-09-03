@@ -159,19 +159,34 @@ public void GerarGraficoLinhaStatus()
 }
 ```
 
+# Gerar Pop Up
+
+```cs
+private void CheckedChanged(object sender, EventArgs e)
+{
+    var cb = sender as CheckBox;
+    if (cb.Checked)
+        Campos.Add(cb.Text);
+    else Campos.Remove(cb.Text);
+}
+```
+
 # Gerar Dashboard
 
 ```cs
 public void GerarDashBoard()
 {
     var db = new Entities4();
+
     var colunas = popup.Campos.ToArray();
     
     dataGridView1.Columns.Clear();
     dataGridView1.Rows.Clear();
 
     foreach (var item in colunas)
+    {
         dataGridView1.Columns.Add(item, item);
+    }
 
     var dados = db.dados_xlsx___TransferenciasPacientes
         .Join(db.dados_xlsx___Usuarios, a => a.PacienteId, s => s.id, (a, s) => new { a, s })
