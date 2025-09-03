@@ -195,22 +195,15 @@ public void GerarDashBoard()
     foreach (var item in dados)
     {
         var row = new List<object>();
-       
         foreach (var campo in popup.Campos)
         {
             var prop = item.a.GetType().GetProperty(campo);
             if (prop != null)
-            {
                 row.Add(prop.GetValue(item.a));
-                continue;
-            }
 
             prop = item.s.GetType().GetProperty(campo);
             if (prop != null)
-            {
                 row.Add(prop.GetValue(item.s));
-                continue;
-            }
         }
         dataGridView1.Rows.Add(row.ToArray());
     }

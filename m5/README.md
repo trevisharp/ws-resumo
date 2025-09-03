@@ -2,7 +2,7 @@
 |--------------------------|-------|
 | Entregas                 | 0.8   |
 | Guia de Estilo (-Fonte)  | 0.4   |
-| Gerenciar de Avaliações  | 2.3   |
+| Gerenciar de Avaliações  | 1.5   |
 | Teste de Unidade         | 2.0   |
 | Teste Funcional          | 2.0   |
 | Nova Avaliação           | 1.7   |
