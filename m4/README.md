@@ -91,15 +91,46 @@ public void GerarGraficoPizza()
 # Card Atendimentos
 
 ```cs
-public void GerarGraficoLinhaTipo()
+string GetStatus(int id)
+{
+    if (id == 1)
+        return "Aguardando atendimento";
+    if (id == 2)
+        return "Em tratamento";
+    if (id == 3)
+        return "Alta";
+    
+    return "Óbito";
+}
+
+string GetTipo(int id)
+{
+    if (id == 1)
+        return "Consulta";
+    if (id == 2)
+        return "Cirurgia";
+    if (id == 3)
+        return "Iternação";
+    
+    return "UTI";
+}
+
+
+public void GerarGraficoLinhaStatus()
 {
     var db = new Entities1();
 
     var dados = db.dados_xlsx___Atendimentos
-        .Join(db.dados_xlsx___StatusClinico, a => a.StatusClinicoId, s => s.Id, (a,s) => new {a,s})
-        .GroupBy(x => x.s.Status)
-        .Select(x => new { Status = x.Key, Quantidade = x.Count()})
+        .ToArray()
+        .GroupBy(x => x.StatusClinicoId)
+        .Select(g => new { Status = GetStatus(g.Key), Quantidade = g.Count()})
         .ToArray();
+        
+    // var dados = db.dados_xlsx___Atendimentos
+    //     .ToArray()
+    //     .GroupBy(x => x.TipoAtendimentoID)
+    //     .Select(g => new { Tipo = GetTipo(g.Key), Quantidade = g.Count()})
+    //     .ToArray();
 
     Series series = new Series("Atendimentos");
     
