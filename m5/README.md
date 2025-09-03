@@ -49,3 +49,7 @@ private void Form1_KeyDown(object sender, KeyEventArgs e)
     }
 }
 ```
+
+# Caso de Teste
+
+<img src="../imgs/caso-de-teste.jpg" />
