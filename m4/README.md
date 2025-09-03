@@ -9,7 +9,6 @@
 | Dashboard                | 1.45  |
 | Habilitar Botão Exportar | 0.15  |
 | Filtros Básicos          | 0.8   |
-| Atendimentos - Paginação | 1.6   |
 
 # Tabela Transferencia
 
@@ -160,56 +159,19 @@ public void GerarGraficoLinhaStatus()
 }
 ```
 
-# Gerar Pop Up
-
-```cs
-private void DefinirPopUp_Load(object sender, EventArgs e)
-{
-    foreach (var column in typeof(dados_xlsx___TransferenciasPacientes).GetProperties())
-    {
-        var cb = new CheckBox();
-        cb.CheckedChanged += (s, a) =>
-        {
-            if (cb.Checked)
-                Campos.Add(cb.Text);
-            else Campos.Remove(cb.Text);
-        };
-
-        cb.Text = column.Name;
-        flowLayoutPanel1.Controls.Add(cb);
-    }
-
-    foreach(var column in typeof(dados_xlsx___Usuarios).GetProperties())
-    {
-        var cb =  new CheckBox();
-        cb.CheckedChanged += (s, a) =>
-        {
-            if (cb.Checked)
-                Campos.Add(cb.Text);
-            else Campos.Remove(cb.Text);
-        };
-        cb.Text = column.Name;
-        flowLayoutPanel2.Controls.Add(cb);
-    }
-}
-```
-
 # Gerar Dashboard
 
 ```cs
 public void GerarDashBoard()
 {
     var db = new Entities4();
-
     var colunas = popup.Campos.ToArray();
     
     dataGridView1.Columns.Clear();
     dataGridView1.Rows.Clear();
 
     foreach (var item in colunas)
-    {
         dataGridView1.Columns.Add(item, item);
-    }
 
     var dados = db.dados_xlsx___TransferenciasPacientes
         .Join(db.dados_xlsx___Usuarios, a => a.PacienteId, s => s.id, (a, s) => new { a, s })
