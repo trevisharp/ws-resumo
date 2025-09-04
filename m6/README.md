@@ -27,6 +27,14 @@ public partial class App : Application
         });
 
         var progress =  new ProgressBar();
+        var img = new Image
+        {
+            Source = "leleo.png",
+            HeightRequest = 200,
+            WidthRequest = 40
+
+        };
+
         var page = new ContentPage
         {
             Content = new VerticalStackLayout
@@ -34,13 +42,15 @@ public partial class App : Application
                 Children =
                 {
                     new Label { Text = "Spllash" },
-                    progress
+                    progress,
+                    img
                 },
             }
         };
 
         page.Loaded += async (sender, e) =>
         {
+            await img.RotateTo(720, 5000);
             await progress.ProgressTo(1,5000,Easing.Linear);
         };
 
